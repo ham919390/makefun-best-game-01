@@ -204,6 +204,20 @@ export function createWorld(random) {
       if (!ember.active) continue;
       ember.y += scroll + EMBER.drift * dt;
       ember.x = ember.baseX + Math.sin(state.time * 1.7 + ember.phase) * 14;
+      // The flame's warmth draws a nearby ember in, bending its fall toward the lantern:
+      // the closer it drifts, the harder it bends, so a near miss can still feed the flame.
+      if (!attract && !state.over && !state.won) {
+        const dx = lantern.x - ember.x;
+        const dy = (lantern.y - 6) - ember.y;
+        const distSq = dx * dx + dy * dy;
+        if (distSq < EMBER.magnetRadius * EMBER.magnetRadius && distSq > 4) {
+          const dist = Math.sqrt(distSq);
+          const bend = EMBER.magnetPull * (1 - dist / EMBER.magnetRadius) * dt;
+          ember.baseX += (dx / dist) * bend;
+          ember.x += (dx / dist) * bend;
+          ember.y += (dy / dist) * bend;
+        }
+      }
       if (ember.y > FIELD.height + 40) { ember.active = false; continue; }
       if (!attract && !state.over && !state.won) {
         const dx = ember.x - lantern.x;

@@ -39,7 +39,9 @@ export const FLAME = {
 
 export const LIVES = 3;
 
-/** Embers: drifting sparks the lantern eats to stay alight. Gold ones are rare and rich. */
+/** Embers: drifting sparks the lantern eats to stay alight. Gold ones are rare and rich.
+ *  The flame's warmth bends a near ember toward the lantern (the magnet below), so a pass
+ *  that only just misses can still feed the flame: the pull fades to nothing at the rim. */
 export const EMBER = {
   radius: 9,
   goldRadius: 12,
@@ -47,6 +49,8 @@ export const EMBER = {
   interval: 0.85,
   intervalJitter: 0.5,
   drift: 26,
+  magnetRadius: 120,
+  magnetPull: 190,
   points: 10,
   goldPoints: 50,
 };
