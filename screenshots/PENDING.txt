@@ -1,0 +1,18 @@
+SCREENSHOTS PENDING — this entry is not submittable until real ones are captured.
+
+The gate requires 3 or 4 screenshots that are real renders of this game's own code in a
+browser (never edited, composited or borrowed), each a PNG or JPEG of at most 256 KiB,
+long side at most 1280 px, short side at least 480 px. The first by name is the cover.
+
+Capture them from the live build (the repository's GitHub Pages site, or `node serve.ts`
+locally) at a 1280x720 viewport, using the deterministic scenes in ../shots.json:
+
+  1-start.jpg   game/?shot=start&seed=1   (title screen)
+  2-play.jpg    game/?shot=play&seed=1    (mid-climb, HUD showing)
+  3-win.jpg     game/?shot=win&seed=1     (dawn reached)
+  4-end.jpg     game/?shot=end&seed=1     (game over)
+
+Each scene sets window.__shotReady = true once it has painted; screenshot after that.
+Save as JPEG quality ~80 to stay under 256 KiB, with exactly the names above, in this
+folder. main.ts copies only image files to the output, so this note never reaches the
+entry; delete it once the screenshots are in.
